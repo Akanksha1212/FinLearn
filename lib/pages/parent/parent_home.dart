@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finlearn/consts/colors.dart';
+import 'package:finlearn/pages/parent/add_chores_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:share/share.dart';
 
@@ -24,27 +26,14 @@ class _ParentHomeState extends State<ParentHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBluePurple,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: kBluePurple,
       ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            DrawerHeader(
-              child: CircleAvatar(
-                radius: 40,
-                backgroundImage: NetworkImage(currentUser.photoURL),
-              ),
-            ),
-            ListTile(
-              title: Text(currentUser.displayName),
-            )
-          ],
-        ),
-      ),
+      drawer: MyDrawer(currentUser: currentUser),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           StreamBuilder(
             stream: FirebaseFirestore.instance
@@ -54,36 +43,197 @@ class _ParentHomeState extends State<ParentHome> {
             builder:
                 (BuildContext cosntext, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.data.docChanges.isNotEmpty) {
-                final data = snapshot.data;
-                return Text(data.toString());
+                final data = snapshot.data.docs[0];
+                return Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    children: [
+                      Text(
+                        "Your Kid",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      CircleAvatar(
+                        radius: 50,
+                        backgroundImage:
+                            NetworkImage(data['photoURL'].toString()),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        data['name'],
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
               } else
                 return Container(
-                  child: Text("Your kids have not joined yet."),
+                  child: Column(
+                    children: [
+                      Text("Your kids have not joined yet."),
+                      FutureBuilder(
+                        future: getParentData(),
+                        builder:
+                            (BuildContext context, AsyncSnapshot snapshot) {
+                          if (snapshot.hasData) {
+                            final dynamicLinkUrl = snapshot.data['referLink'];
+                            return ElevatedButton(
+                              onPressed: () {
+                                Share.share(
+                                    'Hey, Join this app and you will earn rewards.\n Download Now -$dynamicLinkUrl');
+                              },
+                              child: Text("Invite Your Kids"),
+                            );
+                          } else
+                            return CircularProgressIndicator();
+                        },
+                      ),
+                    ],
+                  ),
                 );
             },
           ),
-          Container(
-            child: Center(
-              child: FutureBuilder(
-                future: getParentData(),
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (snapshot.hasData) {
-                    final dynamicLinkUrl = snapshot.data['referLink'];
-                    return ElevatedButton(
-                      onPressed: () {
-                        Share.share(
-                            'Hey, Join this app and you will earn rewards.\n Download Now -$dynamicLinkUrl');
-                      },
-                      child: Text("Invite Your Kids"),
-                    );
-                  } else
-                    return CircularProgressIndicator();
-                },
-              ),
+          Center(
+            child: Text(
+              "Chores",
+              style: GoogleFonts.playfairDisplay(
+                  color: Colors.white, fontSize: 45),
             ),
           ),
-          ElevatedButton(
-            onPressed: () async {
+          Divider(
+            color: Colors.white,
+          ),
+          StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection('tasks')
+                .orderBy('creationTime', descending: true)
+                .snapshots(),
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasData) {
+                final data = snapshot.data.docs;
+                return Expanded(
+                  child: ListView.builder(
+                      itemCount: data.length,
+                      itemBuilder: (context, index) {
+                        final task = data[index];
+                        final isComplete = task['isCompleted'];
+                        final taskTitle = task['title'];
+                        final taskReward = task['rewardValue'];
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 10.0,
+                            horizontal: 25,
+                          ),
+                          child: Material(
+                            elevation: 5,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30)),
+                            child: Container(
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 9.0, horizontal: 15),
+                                    child: isComplete
+                                        ? Icon(
+                                            Icons.done,
+                                            color: Colors.green,
+                                          )
+                                        : Icon(Icons.alarm),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    taskTitle,
+                                    style: TextStyle(fontSize: 18),
+                                  ),
+                                  Expanded(child: Container()),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 9.0, horizontal: 15),
+                                    child: Text('\$ $taskReward'),
+                                  )
+                                ],
+                              ),
+                              height: 60,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  25,
+                                ),
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
+                );
+              } else
+                return CircularProgressIndicator();
+            },
+          ),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: Colors.white,
+          onPressed: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (_) => AddChoresPage()));
+          },
+          label: Text(
+            "Add Chores",
+            style: TextStyle(
+              color: kBluePurple,
+            ),
+          )),
+    );
+  }
+}
+
+class MyDrawer extends StatelessWidget {
+  const MyDrawer({
+    Key key,
+    @required this.currentUser,
+  }) : super(key: key);
+
+  final User currentUser;
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        children: [
+          DrawerHeader(
+            child: CircleAvatar(
+              radius: 40,
+              foregroundImage: NetworkImage(currentUser.photoURL),
+              backgroundImage: NetworkImage(currentUser.photoURL),
+            ),
+          ),
+          ListTile(
+            title: Text(
+              currentUser.displayName,
+              textAlign: TextAlign.center,
+            ),
+          ),
+          ListTile(
+            title: Text(
+              "Logout",
+              textAlign: TextAlign.center,
+            ),
+            onTap: () async {
               await GoogleSignIn().signOut();
               await FirebaseAuth.instance.signOut();
               Navigator.of(context).pushAndRemoveUntil(
@@ -92,8 +242,7 @@ class _ParentHomeState extends State<ParentHome> {
                   ),
                   (route) => false);
             },
-            child: Text('Logout'),
-          ),
+          )
         ],
       ),
     );

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Loans extends StatefulWidget {
+class Level3 extends StatefulWidget {
   @override
-  _LoansState createState() => _LoansState();
+  _Level3State createState() => _Level3State();
 }
 
-class _LoansState extends State<Loans> {
+class _Level3State extends State<Level3> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,7 +18,7 @@ class _LoansState extends State<Loans> {
             height: 40,
           ),
           Text(
-            'Money',
+            'Level 3',
             style: GoogleFonts.playfairDisplay(
               textStyle: TextStyle(
                 color: Color(0xff263284),
@@ -32,8 +32,8 @@ class _LoansState extends State<Loans> {
             // width: MediaQuery.of(context).size.width / 1.5,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("images/bank.png"),
-                fit: BoxFit.cover,
+                image: AssetImage("images/penny.png"),
+                fit: BoxFit.contain,
               ),
             ),
           ),

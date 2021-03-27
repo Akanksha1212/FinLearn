@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Investment extends StatefulWidget {
+class Level2 extends StatefulWidget {
   @override
-  _InvestmentState createState() => _InvestmentState();
+  _Level2State createState() => _Level2State();
 }
 
-class _InvestmentState extends State<Investment> {
+class _Level2State extends State<Level2> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,7 +18,7 @@ class _InvestmentState extends State<Investment> {
             height: 40,
           ),
           Text(
-            'Investment',
+            'Level2',
             style: GoogleFonts.playfairDisplay(
               textStyle: TextStyle(
                 color: Color(0xff263284),

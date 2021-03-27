@@ -1,6 +1,8 @@
-import 'package:finlearn/learn/investment.dart';
-import 'package:finlearn/learn/money.dart';
+import 'package:finlearn/learn/level2.dart';
+import 'package:finlearn/learn/level1.dart';
 import 'package:flutter/material.dart';
+
+import 'level3.dart';
 
 class LearnHome extends StatefulWidget {
   @override
@@ -20,13 +22,13 @@ class _LearnHomeState extends State<LearnHome> {
         controller: controller,
         children: <Widget>[
           Center(
-            child: Loans(),
+            child: Level1(),
           ),
           Center(
-            child: Investment(),
+            child: Level2(),
           ),
           Center(
-            child: Loans(),
+            child: Level3(),
           )
         ],
       )),

@@ -37,6 +37,9 @@ dependencies:
   introduction_screen: ^2.0.0
   firebase_dynamic_links: ^0.8.0
   share: ^2.0.1
+  carousel_slider: ^3.0.0
+  fl_chart: ^0.30.0
+  
 
 dev_dependencies:
   flutter_test:

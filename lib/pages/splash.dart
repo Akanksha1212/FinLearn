@@ -4,7 +4,7 @@ import 'package:finlearn/pages/parent/parent_home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'child/child_home.dart';
+import '../bottomNav.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -25,7 +25,7 @@ class _SplashState extends State<Splash> {
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 bool isParent = snapshot.data['isParent'] as bool;
-                return isParent ? ParentHome() : ChildHome();
+                return isParent ? ParentHome() : BottomNav();
               } else
                 return Scaffold(
                   body: Center(

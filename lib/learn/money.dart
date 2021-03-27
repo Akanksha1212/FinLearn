@@ -18,7 +18,7 @@ class _LoansState extends State<Loans> {
             height: 40,
           ),
           Text(
-            'Loans',
+            'Money',
             style: GoogleFonts.playfairDisplay(
               textStyle: TextStyle(
                 color: Color(0xff263284),

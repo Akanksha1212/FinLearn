@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finlearn/bottomNav.dart';
 import 'package:finlearn/consts/colors.dart';
-import 'package:finlearn/pages/child/child_home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
+import 'child_home.dart';
 
 class ChildLogin extends StatefulWidget {
   final String parentId;
@@ -84,7 +86,7 @@ class _ChildLoginState extends State<ChildLogin> {
                               await _signInWithGoogle(widget.parentId);
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
-                                      builder: (_) => ChildHome()),
+                                      builder: (_) => BottomNav()),
                                   (route) => false);
                             } catch (e) {
                               ScaffoldMessenger.of(context).showSnackBar(

@@ -1,9 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:finlearn/learn/learn.dart';
+import 'package:finlearn/pages/child/child_home.dart';
 
 import 'package:flutter/material.dart';
-
-import 'homePage.dart';
 
 class BottomNav extends StatefulWidget {
   @override
@@ -12,9 +11,9 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> {
   List<Widget> _widgetOptions = <Widget>[
-    Home(),
+    ChildHome(),
     LearnHome(),
-    Home(),
+    ChildHome(),
   ];
   int _currentIndex = 0;
 

@@ -1,5 +1,5 @@
 import 'package:finlearn/learn/investment.dart';
-import 'package:finlearn/learn/loans.dart';
+import 'package:finlearn/learn/money.dart';
 import 'package:flutter/material.dart';
 
 class LearnHome extends StatefulWidget {

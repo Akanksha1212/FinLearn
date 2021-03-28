@@ -19,6 +19,8 @@ class _Level1IntroState extends State<Level1Intro> {
           child: Padding(
             padding: EdgeInsets.all(20),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
                   height: 40,
@@ -136,16 +138,18 @@ class _ChangeMakerState extends State<ChangeMaker> {
           child: Padding(
             padding: EdgeInsets.all(20),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: 20,
+                  height: 45,
                 ),
                 Container(
                   color: Colors.white,
                   child: Padding(
                     padding: EdgeInsets.all(10.0),
                     child: Text(
-                      'Get as much money in your piggy bank as possible, by figuring out the correct change.\n\nFigure out how many of each bill or coin that you expect to get back when you pay for something. For example, if something costs \$3.75 and you pay with a five dollar bill, you would expect back one quarter and one dollar bill.If you get the answer correct, the amount of change is added to your piggy bank. If you get the answer wrong, the correct amount of change is subtracted from your piggy bank. The more money you get in your piggy bank, the harder the questions will get.',
+                      'Get as much money in your piggy bank as possible, by figuring out the correct change.\n\nFigure out how many of each bill or coin that you expect to get back when you pay for something. For example, if something costs \$3.75 and you pay with a five dollar bill, you would expect back one quarter and one dollar bill.If you get the answer correct, the amount of change is added to your piggy bank. If you get the answer wrong, the correct amount of change is subtracted from your piggy bank. The more money you get in your piggy bank, the harder the questions will get.\n',
                       style: GoogleFonts.firaSans(
                         textStyle: TextStyle(
                           color: Color(0xff263284),
@@ -156,9 +160,160 @@ class _ChangeMakerState extends State<ChangeMaker> {
                     ),
                   ),
                 ),
-                Image(
-                  image: AssetImage('images/'),
-                ),
+                Container(
+                  // decoration: const BoxDecoration(
+                  //   borderRadius: BorderRadius.all(
+                  //     Radius.circular(18),
+                  //   ),
+                  color: Color(0xff263284),
+                  child: Padding(
+                    padding: EdgeInsets.all(35),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Amount of Sale: 	\$0.13',
+                          style: GoogleFonts.firaSans(
+                            textStyle: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          'Amount Paid: 	\$0.25',
+                          style: GoogleFonts.firaSans(
+                            textStyle: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: [
+                            Image(
+                              image: AssetImage('images/mario_coin.png'),
+                              height: 40,
+                              width: 40,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width / 2,
+                              color: Colors.white,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: '\$0.25'),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Row(
+                          children: [
+                            Image(
+                              image: AssetImage('images/mario_coin.png'),
+                              height: 40,
+                              width: 40,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width / 2,
+                              color: Colors.white,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: '\$0.10'),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Row(
+                          children: [
+                            Image(
+                              image: AssetImage('images/mario_coin.png'),
+                              height: 40,
+                              width: 40,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width / 2,
+                              color: Colors.white,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: '\$0.05'),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Row(
+                          children: [
+                            Image(
+                              image: AssetImage('images/mario_coin.png'),
+                              height: 40,
+                              width: 40,
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width / 2,
+                              color: Colors.white,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: '\$0.01'),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          width: MediaQuery.of(context).size.width / 1.5,
+                          height: 60,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: RaisedButton(
+                                elevation: 5,
+                                color: Colors.white,
+                                child: Text(
+                                  'Submit',
+                                  style: GoogleFonts.playfairDisplay(
+                                    textStyle: TextStyle(
+                                      color: Color(0xff263284),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                                onPressed: () {}),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
               ],
             ),
           ),

@@ -74,9 +74,6 @@ class _ChildHomeState extends State<ChildHome> {
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                height: 20,
-              ),
               Padding(
                 padding: EdgeInsets.all(20),
                 child: Row(

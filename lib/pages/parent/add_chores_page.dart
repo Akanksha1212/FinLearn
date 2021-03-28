@@ -83,14 +83,23 @@ class _AddChoresPageState extends State<AddChoresPage> {
                             sliderValue = val;
                           });
                         },
-                        max: 100,
-                        min: 10,
+                        max: 50,
+                        min: 5,
                       ),
-                      Center(
-                          child: Text(
-                        'Reward Value: ${sliderValue.ceil()} FinCoins',
-                        style: TextStyle(fontSize: 20),
-                      ))
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Center(
+                              child: Text(
+                            'Reward Value: ${sliderValue.ceil()} FinCoins',
+                            style: TextStyle(fontSize: 20),
+                          )),
+                          SizedBox(
+                            height: 30,
+                            child: Image.asset('images/mario_coin.png'),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),

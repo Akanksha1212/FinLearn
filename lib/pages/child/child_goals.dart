@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:finlearn/consts/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -11,20 +12,27 @@ class ChildGoal extends StatefulWidget {
 class _ChildGoalState extends State<ChildGoal> {
   @override
   Widget build(BuildContext context) {
+    final kidsFirstName =
+        FirebaseAuth.instance.currentUser.displayName.split(' ')[0];
     return SafeArea(
       child: Container(
-        color: Colors.white,
+        color: kBluePurple,
         child: Column(
           children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child:
+                  SizedBox(height: 120, child: Image.asset('images/giphy.gif')),
+            ),
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Center(
                   child: Text(
-                'My Goals',
+                '$kidsFirstName\'s Goals',
                 style: GoogleFonts.playfairDisplay(
                   fontSize: 40,
                   // fontWeight: FontWeight.bold,
-                  color: kBluePurple,
+                  color: Colors.white,
                 ),
               )),
             ),
@@ -35,7 +43,7 @@ class _ChildGoalState extends State<ChildGoal> {
                 style: TextStyle(
                   fontSize: 25,
                   // fontWeight: FontWeight.bold,
-                  color: kBluePurple,
+                  color: Colors.white,
                 ),
               ),
             ),
@@ -70,8 +78,8 @@ class _ChildGoalState extends State<ChildGoal> {
                                   child: Row(
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 9.0, horizontal: 15),
+                                        padding: const EdgeInsets.only(
+                                            top: 9.0, bottom: 9, left: 10),
                                         child: Checkbox(
                                             value: isComplete,
                                             onChanged: (val) {
@@ -83,19 +91,28 @@ class _ChildGoalState extends State<ChildGoal> {
                                               });
                                             }),
                                       ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
+                                      // SizedBox(
+                                      //   width: 10,
+                                      // ),
                                       Text(
                                         taskTitle,
-                                        style: TextStyle(fontSize: 18),
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          color: kBluePurple,
+                                        ),
                                       ),
                                       Expanded(child: Container()),
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
-                                            vertical: 9.0, horizontal: 15),
+                                            vertical: 8.0),
+                                        child: Image.asset(
+                                            'images/mario_coin.png'),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            bottom: 9, top: 9.0, right: 15),
                                         child: Text(
-                                          '\$ $taskReward',
+                                          '$taskReward',
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20,
@@ -111,7 +128,7 @@ class _ChildGoalState extends State<ChildGoal> {
                                     ),
                                     color: isComplete
                                         ? Colors.greenAccent.shade100
-                                        : Colors.yellow.shade100,
+                                        : Color(0xffE0CAF7),
                                   ),
                                 ),
                               ),

@@ -199,8 +199,20 @@ class _ParentHomeState extends State<ParentHome> {
                                     Expanded(child: Container()),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          vertical: 9.0, horizontal: 15),
-                                      child: Text('\$ $taskReward'),
+                                          vertical: 8.0),
+                                      child:
+                                          Image.asset('images/mario_coin.png'),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          bottom: 9, top: 9.0, right: 15),
+                                      child: Text(
+                                        '$taskReward',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                        ),
+                                      ),
                                     )
                                   ],
                                 ),
@@ -211,7 +223,7 @@ class _ParentHomeState extends State<ParentHome> {
                                   ),
                                   color: isComplete
                                       ? Colors.greenAccent.shade100
-                                      : Colors.yellow.shade100,
+                                      : Color(0xffE0CAF7),
                                 ),
                               ),
                             ),

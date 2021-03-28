@@ -16,6 +16,7 @@ class IntroPage extends StatefulWidget {
 }
 
 class _IntroPageState extends State<IntroPage> with WidgetsBindingObserver {
+  bool isLoading = false;
   final introKey = GlobalKey<IntroductionScreenState>();
   Future onResumeHandleDynamicLink() async {
     FirebaseDynamicLinks.instance.onLink(
@@ -117,39 +118,47 @@ class _IntroPageState extends State<IntroPage> with WidgetsBindingObserver {
                   "FinCoins show patterns similar to Fiat like inflation etc.",
               image: _buildImage('slider2.jpg'),
               decoration: pageDecoration,
-              footer: OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                    backgroundColor: kBluePurple,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 90, vertical: 18),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    )),
-                onPressed: () async {
-                  try {
-                    await _signInWithGoogle();
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (_) => ParentHome()),
-                        (route) => false);
-                  } catch (e) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          e.toString(),
+              footer: isLoading
+                  ? CircularProgressIndicator()
+                  : OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                          backgroundColor: kBluePurple,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 90, vertical: 18),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          )),
+                      onPressed: () async {
+                        setState(() {
+                          isLoading = true;
+                        });
+                        try {
+                          await _signInWithGoogle();
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(builder: (_) => ParentHome()),
+                              (route) => false);
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                e.toString(),
+                              ),
+                            ),
+                          );
+                        }
+                        setState(() {
+                          isLoading = false;
+                        });
+                      },
+                      child: Text(
+                        "Get Started!",
+                        style: GoogleFonts.playfairDisplay(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    );
-                  }
-                },
-                child: Text(
-                  "Get Started!",
-                  style: GoogleFonts.playfairDisplay(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+                    ),
             ),
           ],
           next: const Text("Next",

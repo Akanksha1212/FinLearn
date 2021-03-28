@@ -19,38 +19,27 @@ class _StockPageState extends State<StockPage> {
           backgroundColor: kBluePurple,
           title: Text("Stocks"),
           centerTitle: true,
+          elevation: 0,
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: kBluePurple ?? Colors.white,
         body: SingleChildScrollView(
           child: Center(
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Text(
-                    "Most Active Stocks",
-                    style: GoogleFonts.playfairDisplay(fontSize: 30),
-                  ),
+                StockHeader(
+                  title: "Most Active Stocks",
                 ),
                 StockList(
                   future: StockServices.getMostActiveStokcs(),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Text(
-                    "Top Gainers",
-                    style: GoogleFonts.playfairDisplay(fontSize: 30),
-                  ),
+                StockHeader(
+                  title: "Top Gainers",
                 ),
                 StockList(
                   future: StockServices.getTopGainer(),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Text(
-                    "Top Losers",
-                    style: GoogleFonts.playfairDisplay(fontSize: 30),
-                  ),
+                StockHeader(
+                  title: "Top Losers",
                 ),
                 StockList(
                   future: StockServices.getTopLosers(),
@@ -58,6 +47,28 @@ class _StockPageState extends State<StockPage> {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class StockHeader extends StatelessWidget {
+  final String title;
+  const StockHeader({
+    Key key,
+    @required this.title,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 12),
+        child: Text(
+          title ?? "Most Active Stocks",
+          style: GoogleFonts.playfairDisplay(fontSize: 30, color: Colors.white),
         ),
       ),
     );
@@ -123,7 +134,13 @@ class StockList extends StatelessWidget {
                                   style: TextStyle(fontSize: 17),
                                 ),
                               ),
-                              Expanded(child: Container()),
+                              OutlinedButton(
+                                onPressed: () {},
+                                child: Text("Trade"),
+                              ),
+                              Expanded(
+                                child: Container(),
+                              ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 10.0,

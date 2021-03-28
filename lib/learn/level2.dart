@@ -1,3 +1,4 @@
+import 'package:finlearn/learn/level2/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -61,7 +62,12 @@ class _Level2State extends State<Level2> {
                     ),
                   ),
                 ),
-                onPressed: () {}),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Level2Intro()),
+                  );
+                }),
           ),
         ],
       ),

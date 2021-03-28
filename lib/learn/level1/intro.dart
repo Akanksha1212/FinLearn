@@ -167,7 +167,7 @@ class _ChangeMakerState extends State<ChangeMaker> {
                   //   ),
                   color: Color(0xff263284),
                   child: Padding(
-                    padding: EdgeInsets.all(35),
+                    padding: EdgeInsets.fromLTRB(0, 35, 0, 35),
                     child: Column(
                       children: [
                         Text(
@@ -196,94 +196,116 @@ class _ChangeMakerState extends State<ChangeMaker> {
                         Row(
                           children: [
                             Image(
-                              image: AssetImage('images/mario_coin.png'),
-                              height: 40,
-                              width: 40,
+                              image: NetworkImage(
+                                  'https://media2.giphy.com/media/3ohhwEVKBOZd7bCQ7u/giphy.gif'),
+                              height: 150,
+                              width: 150,
                             ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width / 2,
-                              color: Colors.white,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: '\$0.25'),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          children: [
-                            Image(
-                              image: AssetImage('images/mario_coin.png'),
-                              height: 40,
-                              width: 40,
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width / 2,
-                              color: Colors.white,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: '\$0.10'),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          children: [
-                            Image(
-                              image: AssetImage('images/mario_coin.png'),
-                              height: 40,
-                              width: 40,
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width / 2,
-                              color: Colors.white,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: '\$0.05'),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          children: [
-                            Image(
-                              image: AssetImage('images/mario_coin.png'),
-                              height: 40,
-                              width: 40,
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width / 2,
-                              color: Colors.white,
-                              child: TextField(
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: '\$0.01'),
-                              ),
-                            ),
+                            Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Image(
+                                      image:
+                                          AssetImage('images/mario_coin.png'),
+                                      height: 40,
+                                      width: 40,
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 4,
+                                      color: Colors.white,
+                                      child: TextField(
+                                        decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            hintText: '  \$0.25'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Row(
+                                  children: [
+                                    Image(
+                                      image:
+                                          AssetImage('images/mario_coin.png'),
+                                      height: 40,
+                                      width: 40,
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 4,
+                                      color: Colors.white,
+                                      child: TextField(
+                                        decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            hintText: '  \$0.10'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Row(
+                                  children: [
+                                    Image(
+                                      image:
+                                          AssetImage('images/mario_coin.png'),
+                                      height: 40,
+                                      width: 40,
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 4,
+                                      color: Colors.white,
+                                      child: TextField(
+                                        decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            hintText: '  \$0.05'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Row(
+                                  children: [
+                                    Image(
+                                      image:
+                                          AssetImage('images/mario_coin.png'),
+                                      height: 40,
+                                      width: 40,
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 4,
+                                      color: Colors.white,
+                                      child: TextField(
+                                        decoration: InputDecoration(
+                                            border: InputBorder.none,
+                                            hintText: '  \$0.01'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            )
                           ],
                         ),
                         SizedBox(
@@ -295,19 +317,103 @@ class _ChangeMakerState extends State<ChangeMaker> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: RaisedButton(
-                                elevation: 5,
-                                color: Colors.white,
-                                child: Text(
-                                  'Submit',
-                                  style: GoogleFonts.playfairDisplay(
-                                    textStyle: TextStyle(
-                                      color: Color(0xff263284),
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                              elevation: 5,
+                              color: Colors.white,
+                              child: Text(
+                                'Submit',
+                                style: GoogleFonts.playfairDisplay(
+                                  textStyle: TextStyle(
+                                    color: Color(0xff263284),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                                onPressed: () {}),
+                              ),
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20.0))),
+                                      backgroundColor: Colors.white,
+                                      content: Container(
+                                        height: 450,
+                                        width: 300,
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              'Awesome!',
+                                              style:
+                                                  GoogleFonts.playfairDisplay(
+                                                textStyle: TextStyle(
+                                                  color: Color(0xff263284),
+                                                  fontSize: 32,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              'Well done. You have earned some FinCoins for your piggy bank',
+                                              style:
+                                                  GoogleFonts.playfairDisplay(
+                                                textStyle: TextStyle(
+                                                  color: Color(0xff263284),
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Image(
+                                              image: NetworkImage(
+                                                  'https://i.pinimg.com/originals/d8/c3/af/d8c3afe7e1647fea2d8e9f95dfa820f5.gif'),
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  1.2,
+                                              height: 60,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: RaisedButton(
+                                                  elevation: 5,
+                                                  color: Color(0xff263284),
+                                                  child: Text(
+                                                    'Next',
+                                                    style: GoogleFonts
+                                                        .playfairDisplay(
+                                                      textStyle: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  onPressed: () {},
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
                           ),
                         ),
                       ],

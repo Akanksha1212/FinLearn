@@ -37,6 +37,10 @@ dependencies:
   intro_slider: ^2.3.4
   introduction_screen: ^2.0.0
   share: ^2.0.1
+  
+  
+  page_turn: ^1.0.1
+  
 
 dev_dependencies:
   flutter_test:

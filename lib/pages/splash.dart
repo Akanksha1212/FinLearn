@@ -28,9 +28,7 @@ class _SplashState extends State<Splash> {
                 return isParent ? ParentHome() : BottomNav();
               } else
                 return Scaffold(
-                  body: Center(
-                    child: CircularProgressIndicator(),
-                  ),
+                  body: Center(child: CircularProgressIndicator()),
                 );
             },
           );

@@ -1,4 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:finlearn/consts/colors.dart';
 import 'package:finlearn/learn/learn.dart';
 import 'package:finlearn/pages/child/child_goals.dart';
 import 'package:finlearn/pages/child/child_home.dart';
@@ -21,6 +22,7 @@ class _BottomNavState extends State<BottomNav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBluePurple,
       body: _widgetOptions[_currentIndex],
       bottomNavigationBar: CurvedNavigationBar(
         height: 55,

@@ -173,7 +173,10 @@ class WalletWidget extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
-                  child: Icon(Icons.account_balance_wallet_rounded),
+                  child: Icon(
+                    Icons.account_balance_wallet_rounded,
+                    color: kBluePurple,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -205,6 +208,7 @@ class WalletWidget extends StatelessWidget {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
+                              color: kBluePurple,
                             ),
                           ),
                         );

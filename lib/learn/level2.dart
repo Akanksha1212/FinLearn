@@ -11,17 +11,17 @@ class _Level2State extends State<Level2> {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(color: Color(0xfff392b1)),
+      decoration: BoxDecoration(color: Color(0xff263284)),
       child: Column(
         children: [
           SizedBox(
             height: 40,
           ),
           Text(
-            'Level2',
+            'Level 2',
             style: GoogleFonts.playfairDisplay(
               textStyle: TextStyle(
-                color: Color(0xff263284),
+                color: Colors.white,
                 fontSize: 34,
                 fontWeight: FontWeight.w400,
               ),

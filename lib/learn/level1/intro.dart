@@ -142,7 +142,7 @@ class _ChangeMakerState extends State<ChangeMaker> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: 45,
+                  height: 25,
                 ),
                 Container(
                   color: Colors.white,

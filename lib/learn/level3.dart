@@ -11,7 +11,7 @@ class _Level3State extends State<Level3> {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(color: Color(0xfff392b1)),
+      decoration: BoxDecoration(color: Color(0xff263284)),
       child: Column(
         children: [
           SizedBox(
@@ -21,7 +21,7 @@ class _Level3State extends State<Level3> {
             'Level 3',
             style: GoogleFonts.playfairDisplay(
               textStyle: TextStyle(
-                color: Color(0xff263284),
+                color: Colors.white,
                 fontSize: 34,
                 fontWeight: FontWeight.w400,
               ),

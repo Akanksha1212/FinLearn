@@ -97,6 +97,57 @@ class _ParentHomeState extends State<ParentHome> {
                             color: Colors.white,
                           ),
                         ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 8.0),
+                              child: SizedBox(
+                                height: 30,
+                                child: Image.asset('images/mario_coin.png'),
+                              ),
+                            ),
+                            StreamBuilder(
+                              stream: FirebaseFirestore.instance
+                                  .collection('tasks')
+                                  .orderBy('creationTime', descending: true)
+                                  .where('isCompleted', isEqualTo: true)
+                                  .where('assignedTo', isEqualTo: data.id)
+                                  .snapshots(),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.active) {
+                                  if (snapshot.hasData) {
+                                    final data = snapshot.data.docs;
+
+                                    int total = 0;
+                                    data.forEach((element) {
+                                      total += element.data()['rewardValue'];
+                                    });
+                                    return Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 15.0),
+                                      child: Text(
+                                        total.toString(),
+                                        style: GoogleFonts.firaSans(
+                                          textStyle: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 32,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  } else
+                                    return CircularProgressIndicator();
+                                } else
+                                  return CircularProgressIndicator();
+                              },
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   );

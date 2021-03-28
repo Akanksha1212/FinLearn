@@ -30,7 +30,7 @@ class _AddChoresPageState extends State<AddChoresPage> {
                 },
                 backgroundColor: kBluePurple,
                 label: Text(
-                  "Add Chores",
+                  "Add Chore",
                 ),
               ),
         body: Column(

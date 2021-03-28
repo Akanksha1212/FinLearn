@@ -1,3 +1,4 @@
+import 'package:finlearn/stocks/pages/top_stocks.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -61,7 +62,10 @@ class _Level3State extends State<Level3> {
                     ),
                   ),
                 ),
-                onPressed: () {}),
+                onPressed: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (_) => StockPage()));
+                }),
           ),
         ],
       ),

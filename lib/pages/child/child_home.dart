@@ -69,6 +69,8 @@ class _ChildHomeState extends State<ChildHome> {
 
   @override
   Widget build(BuildContext context) {
+    final currentUserId = FirebaseAuth.instance.currentUser.uid;
+
     return Container(
       color: Color(0xff263284),
       child: Center(
@@ -161,6 +163,8 @@ class _ChildHomeState extends State<ChildHome> {
                                     .collection('tasks')
                                     .orderBy('creationTime', descending: true)
                                     .where('isCompleted', isEqualTo: true)
+                                    .where('assignedTo',
+                                        isEqualTo: currentUserId)
                                     .snapshots(),
                                 builder: (BuildContext context,
                                     AsyncSnapshot<QuerySnapshot> snapshot) {

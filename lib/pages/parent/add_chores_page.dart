@@ -5,6 +5,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class AddChoresPage extends StatefulWidget {
+  final String assignedUser;
+
+  const AddChoresPage({Key key, this.assignedUser}) : super(key: key);
   @override
   _AddChoresPageState createState() => _AddChoresPageState();
 }
@@ -23,7 +26,7 @@ class _AddChoresPageState extends State<AddChoresPage> {
                 valueColor: AlwaysStoppedAnimation<Color>(kBluePurple))
             : FloatingActionButton.extended(
                 onPressed: () {
-                  saveChoreToDB();
+                  saveChoreToDB(widget.assignedUser);
                 },
                 backgroundColor: kBluePurple,
                 label: Text(
@@ -110,7 +113,7 @@ class _AddChoresPageState extends State<AddChoresPage> {
     );
   }
 
-  Future saveChoreToDB() async {
+  Future saveChoreToDB(String childUid) async {
     setState(() {
       isLoading = true;
     });
@@ -119,7 +122,7 @@ class _AddChoresPageState extends State<AddChoresPage> {
         'title': taskNameTEC.text,
         'rewardValue': sliderValue.ceil(),
         'isCompleted': false,
-        'assignedTo': 'uid',
+        'assignedTo': childUid,
         'createdBy': FirebaseAuth.instance.currentUser.uid,
         'creationTime': Timestamp.now()
       });

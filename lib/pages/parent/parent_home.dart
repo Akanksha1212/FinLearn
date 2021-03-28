@@ -23,6 +23,19 @@ class _ParentHomeState extends State<ParentHome> {
         .get();
   }
 
+  String childUid;
+  Future setChildUid() async {
+    String childid = (await FirebaseFirestore.instance
+            .collection('users')
+            .where('parentId', isEqualTo: currentUser.uid)
+            .get())
+        .docs[0]
+        .id;
+    setState(() {
+      childUid = childid;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,18 +58,26 @@ class _ParentHomeState extends State<ParentHome> {
               if (snapshot.hasData) {
                 if (snapshot.data.docs.isNotEmpty) {
                   final data = snapshot.data.docs[0];
+                  childUid = data.id;
                   return Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(5.0),
                     child: Column(
                       children: [
-                        Text(
-                          "Your FinKid",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 25,
-                            color: Colors.white,
+                        Center(
+                          child: Text(
+                            "Your FinKid",
+                            style: GoogleFonts.playfairDisplay(
+                                color: Colors.white, fontSize: 45),
                           ),
                         ),
+                        // Text(
+                        //   "Your FinKid",
+                        //   textAlign: TextAlign.left,
+                        //   style: TextStyle(
+                        //     fontSize: 25,
+                        //     color: Colors.white,
+                        //   ),
+                        // ),
                         SizedBox(
                           height: 20,
                         ),
@@ -141,8 +162,14 @@ class _ParentHomeState extends State<ParentHome> {
                 return CircularProgressIndicator();
             },
           ),
+          SizedBox(
+            height: 10,
+          ),
+          Divider(
+            color: Colors.white,
+          ),
           Padding(
-            padding: const EdgeInsets.only(top: 20.0),
+            padding: const EdgeInsets.only(bottom: 10),
             child: Center(
               child: Text(
                 "Chores",
@@ -151,13 +178,11 @@ class _ParentHomeState extends State<ParentHome> {
               ),
             ),
           ),
-          Divider(
-            color: Colors.white,
-          ),
           StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection('tasks')
                 .orderBy('creationTime', descending: true)
+                .where('createdBy', isEqualTo: currentUser.uid)
                 .snapshots(),
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -246,8 +271,10 @@ class _ParentHomeState extends State<ParentHome> {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Colors.white,
         onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (_) => AddChoresPage()));
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => AddChoresPage(
+                    assignedUser: childUid,
+                  )));
         },
         label: Text(
           "Add Chores",

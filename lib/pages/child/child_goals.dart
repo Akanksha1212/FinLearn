@@ -10,6 +10,7 @@ class ChildGoal extends StatefulWidget {
 }
 
 class _ChildGoalState extends State<ChildGoal> {
+  final currentUserId = FirebaseAuth.instance.currentUser.uid;
   @override
   Widget build(BuildContext context) {
     final kidsFirstName =
@@ -52,6 +53,7 @@ class _ChildGoalState extends State<ChildGoal> {
               stream: FirebaseFirestore.instance
                   .collection('tasks')
                   .orderBy('creationTime', descending: true)
+                  .where('assignedTo', isEqualTo: currentUserId)
                   .snapshots(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -156,6 +158,8 @@ class WalletWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currentUserId = FirebaseAuth.instance.currentUser.uid;
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Align(
@@ -190,6 +194,7 @@ class WalletWidget extends StatelessWidget {
                       .collection('tasks')
                       .orderBy('creationTime', descending: true)
                       .where('isCompleted', isEqualTo: true)
+                      .where('assignedTo', isEqualTo: currentUserId)
                       .snapshots(),
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {

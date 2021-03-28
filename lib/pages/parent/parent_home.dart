@@ -83,8 +83,7 @@ class _ParentHomeState extends State<ParentHome> {
                         ),
                         CircleAvatar(
                           radius: 60,
-                          backgroundImage: NetworkImage(
-                                  "https://image.freepik.com/free-photo/outdoor-handsome-boy-portrait-teen-boy-hood-park-nature-background_79443-26.jpg") ??
+                          backgroundImage:
                               NetworkImage(data['photoURL'].toString()),
                         ),
                         SizedBox(

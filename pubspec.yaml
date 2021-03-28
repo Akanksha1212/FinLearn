@@ -37,15 +37,21 @@ dependencies:
   intro_slider: ^2.3.4
   introduction_screen: ^2.0.0
   share: ^2.0.1
-  
-  
+
   page_turn: ^1.0.1
-  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  flutter_launcher_icons: ^0.9.0
+  flutter_native_splash: ^1.1.5+1
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "images/app_icons.png"
+flutter_native_splash:
+  color: "#ffffff"
+  image: "images/app_icons.png"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter.

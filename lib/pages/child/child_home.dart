@@ -70,137 +70,139 @@ class _ChildHomeState extends State<ChildHome> {
     return Container(
       color: Color(0xff263284),
       child: Center(
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: EdgeInsets.all(20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: SingleChildScrollView(
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: EdgeInsets.all(20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CircleAvatar(
+                      radius: 30,
+                      backgroundImage: NetworkImage(
+                        FirebaseAuth.instance.currentUser.photoURL,
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        await GoogleSignIn().signOut();
+                        await FirebaseAuth.instance.signOut();
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                              builder: (_) => IntroPage(),
+                            ),
+                            (route) => false);
+                      },
+                      child: Text('Logout'),
+                    ),
+                  ],
+                ),
+              ),
+              SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    CarouselSlider(
+                      items: imageSliders,
+                      options: CarouselOptions(
+                        enlargeCenterPage: true,
+                        height: 200,
+                      ),
+                      carouselController: _controller,
+                    ),
+                  ],
+                ),
+              ),
+              Padding(padding: EdgeInsets.all(25), child: LineChartSample2()),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundImage: NetworkImage(
-                      FirebaseAuth.instance.currentUser.photoURL,
+                  Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(18),
+                      ),
+                      color: Color(0xff727cb1),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(35),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Current',
+                            style: GoogleFonts.playfairDisplay(
+                              textStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            '\$1000',
+                            style: GoogleFonts.firaSans(
+                              textStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: 32,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      await GoogleSignIn().signOut();
-                      await FirebaseAuth.instance.signOut();
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                            builder: (_) => IntroPage(),
+                  Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(18),
+                      ),
+                      color: Color(0xff727cb1),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(35),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Saved',
+                            style: GoogleFonts.playfairDisplay(
+                              textStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
                           ),
-                          (route) => false);
-                    },
-                    child: Text('Logout'),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            '\$200',
+                            style: GoogleFonts.firaSans(
+                              textStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: 32,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),
-            ),
-            SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  CarouselSlider(
-                    items: imageSliders,
-                    options: CarouselOptions(
-                      enlargeCenterPage: true,
-                      height: 200,
-                    ),
-                    carouselController: _controller,
-                  ),
-                ],
-              ),
-            ),
-            Padding(padding: EdgeInsets.all(25), child: LineChartSample2()),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(18),
-                    ),
-                    color: Color(0xff727cb1),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(35),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Current',
-                          style: GoogleFonts.playfairDisplay(
-                            textStyle: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          '\$1000',
-                          style: GoogleFonts.firaSans(
-                            textStyle: TextStyle(
-                              color: Colors.white,
-                              fontSize: 32,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(18),
-                    ),
-                    color: Color(0xff727cb1),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(35),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Saved',
-                          style: GoogleFonts.playfairDisplay(
-                            textStyle: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          '\$200',
-                          style: GoogleFonts.firaSans(
-                            textStyle: TextStyle(
-                              color: Colors.white,
-                              fontSize: 32,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

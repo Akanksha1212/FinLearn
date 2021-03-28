@@ -39,6 +39,7 @@ dependencies:
   share: ^2.0.1
   carousel_slider: ^3.0.0
   fl_chart: ^0.30.0
+  page_turn: ^1.0.1
   
 
 dev_dependencies:

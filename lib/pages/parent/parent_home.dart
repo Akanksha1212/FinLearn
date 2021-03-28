@@ -49,10 +49,10 @@ class _ParentHomeState extends State<ParentHome> {
                   child: Column(
                     children: [
                       Text(
-                        "Your Kid",
+                        "Your FinKid",
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 25,
                           color: Colors.white,
                         ),
                       ),
@@ -81,34 +81,69 @@ class _ParentHomeState extends State<ParentHome> {
                 return Container(
                   child: Column(
                     children: [
-                      Text("Your kids have not joined yet."),
-                      FutureBuilder(
-                        future: getParentData(),
-                        builder:
-                            (BuildContext context, AsyncSnapshot snapshot) {
-                          if (snapshot.hasData) {
-                            final dynamicLinkUrl = snapshot.data['referLink'];
-                            return ElevatedButton(
-                              onPressed: () {
-                                Share.share(
-                                    'Hey, Join this app and you will earn rewards.\n Download Now -$dynamicLinkUrl');
-                              },
-                              child: Text("Invite Your Kids"),
-                            );
-                          } else
-                            return CircularProgressIndicator();
-                        },
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0,
+                          vertical: 20,
+                        ),
+                        child: Text(
+                          "Your FinKid has not joined yet.",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0,
+                          vertical: 20,
+                        ),
+                        child: FutureBuilder(
+                          future: getParentData(),
+                          builder:
+                              (BuildContext context, AsyncSnapshot snapshot) {
+                            if (snapshot.hasData) {
+                              final dynamicLinkUrl = snapshot.data['referLink'];
+                              return OutlinedButton(
+                                style: OutlinedButton.styleFrom(
+                                    backgroundColor: Colors.white,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 90, vertical: 18),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    )),
+                                onPressed: () {
+                                  Share.share(
+                                      'Hey, Download this app and you will earn rewards.\n Download Now -$dynamicLinkUrl');
+                                },
+                                child: Text(
+                                  "Invite Your FinKid!",
+                                  style: GoogleFonts.playfairDisplay(
+                                    color: kBluePurple ?? Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              );
+                            } else
+                              return CircularProgressIndicator();
+                          },
+                        ),
                       ),
                     ],
                   ),
                 );
             },
           ),
-          Center(
-            child: Text(
-              "Chores",
-              style: GoogleFonts.playfairDisplay(
-                  color: Colors.white, fontSize: 45),
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: Center(
+              child: Text(
+                "Chores",
+                style: GoogleFonts.playfairDisplay(
+                    color: Colors.white, fontSize: 45),
+              ),
             ),
           ),
           Divider(
@@ -121,65 +156,70 @@ class _ParentHomeState extends State<ParentHome> {
                 .snapshots(),
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (snapshot.hasData) {
-                final data = snapshot.data.docs;
-                return Expanded(
-                  child: ListView.builder(
-                      itemCount: data.length,
-                      itemBuilder: (context, index) {
-                        final task = data[index];
-                        final isComplete = task['isCompleted'];
-                        final taskTitle = task['title'];
-                        final taskReward = task['rewardValue'];
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 10.0,
-                            horizontal: 25,
-                          ),
-                          child: Material(
-                            elevation: 5,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                            child: Container(
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 9.0, horizontal: 15),
-                                    child: isComplete
-                                        ? Icon(
-                                            Icons.done,
-                                            color: Colors.green,
-                                          )
-                                        : Icon(Icons.alarm),
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    taskTitle,
-                                    style: TextStyle(fontSize: 18),
-                                  ),
-                                  Expanded(child: Container()),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 9.0, horizontal: 15),
-                                    child: Text('\$ $taskReward'),
-                                  )
-                                ],
-                              ),
-                              height: 60,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                  25,
+              if (snapshot.connectionState == ConnectionState.active) {
+                if (snapshot.hasData) {
+                  final data = snapshot.data.docs;
+                  return Expanded(
+                    child: ListView.builder(
+                        itemCount: data.length,
+                        itemBuilder: (context, index) {
+                          final task = data[index];
+                          final isComplete = task['isCompleted'];
+                          final taskTitle = task['title'];
+                          final taskReward = task['rewardValue'];
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 10.0,
+                              horizontal: 25,
+                            ),
+                            child: Material(
+                              elevation: 5,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30)),
+                              child: Container(
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 9.0, horizontal: 15),
+                                      child: isComplete
+                                          ? Icon(
+                                              Icons.done,
+                                              color: Colors.green,
+                                            )
+                                          : Icon(Icons.alarm),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      taskTitle,
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                    Expanded(child: Container()),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 9.0, horizontal: 15),
+                                      child: Text('\$ $taskReward'),
+                                    )
+                                  ],
                                 ),
-                                color: Colors.white,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(
+                                    25,
+                                  ),
+                                  color: isComplete
+                                      ? Colors.greenAccent.shade100
+                                      : Colors.yellow.shade100,
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      }),
-                );
+                          );
+                        }),
+                  );
+                } else
+                  return CircularProgressIndicator();
               } else
                 return CircularProgressIndicator();
             },
@@ -187,17 +227,18 @@ class _ParentHomeState extends State<ParentHome> {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-          backgroundColor: Colors.white,
-          onPressed: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (_) => AddChoresPage()));
-          },
-          label: Text(
-            "Add Chores",
-            style: TextStyle(
-              color: kBluePurple,
-            ),
-          )),
+        backgroundColor: Colors.white,
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (_) => AddChoresPage()));
+        },
+        label: Text(
+          "Add Chores",
+          style: TextStyle(
+            color: kBluePurple,
+          ),
+        ),
+      ),
     );
   }
 }

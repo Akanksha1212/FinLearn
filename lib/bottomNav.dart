@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:finlearn/learn/learn.dart';
+import 'package:finlearn/pages/child/child_goals.dart';
 import 'package:finlearn/pages/child/child_home.dart';
 
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class _BottomNavState extends State<BottomNav> {
   List<Widget> _widgetOptions = <Widget>[
     ChildHome(),
     LearnHome(),
-    ChildHome(),
+    ChildGoal(),
   ];
   int _currentIndex = 0;
 

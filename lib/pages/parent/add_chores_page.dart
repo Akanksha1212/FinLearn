@@ -12,7 +12,7 @@ class AddChoresPage extends StatefulWidget {
 class _AddChoresPageState extends State<AddChoresPage> {
   final TextEditingController taskNameTEC = TextEditingController();
   final TextEditingController rewardValueTEC = TextEditingController();
-  double sliderValue = 50;
+  double sliderValue = 20;
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
@@ -46,9 +46,7 @@ class _AddChoresPageState extends State<AddChoresPage> {
                     }),
               ),
             ),
-            SizedBox(
-              height: 100,
-            ),
+            SizedBox(height: 150, child: Image.asset('images/kid.png')),
             Form(
                 child: Expanded(
               child: Padding(
@@ -62,6 +60,7 @@ class _AddChoresPageState extends State<AddChoresPage> {
                           style: TextStyle(
                             fontSize: 30,
                           ),
+                          textAlign: TextAlign.center,
                           decoration: InputDecoration(
                             hintStyle: TextStyle(
                               fontSize: 25,
@@ -73,7 +72,7 @@ class _AddChoresPageState extends State<AddChoresPage> {
                         ),
                       ),
                       SizedBox(
-                        height: 40,
+                        height: 20,
                       ),
                       Slider(
                         activeColor: kBluePurple,

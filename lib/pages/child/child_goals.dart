@@ -19,6 +19,7 @@ class _ChildGoalState extends State<ChildGoal> {
         color: kBluePurple,
         child: Column(
           children: [
+            WalletWidget(),
             Padding(
               padding: const EdgeInsets.only(top: 20.0),
               child:
@@ -142,6 +143,80 @@ class _ChildGoalState extends State<ChildGoal> {
               },
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class WalletWidget extends StatelessWidget {
+  const WalletWidget({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Align(
+        alignment: Alignment.topRight,
+        child: Material(
+          elevation: 10,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20), color: Colors.white),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Icon(Icons.account_balance_wallet_rounded),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: SizedBox(
+                    height: 30,
+                    child: Image.asset('images/mario_coin.png'),
+                  ),
+                ),
+                StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection('tasks')
+                      .orderBy('creationTime', descending: true)
+                      .where('isCompleted', isEqualTo: true)
+                      .snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.active) {
+                      if (snapshot.hasData) {
+                        final data = snapshot.data.docs;
+
+                        int total = 0;
+                        data.forEach((element) {
+                          total += element.data()['rewardValue'];
+                        });
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 15.0),
+                          child: Text(
+                            total.toString(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        );
+                      } else
+                        return CircularProgressIndicator();
+                    } else
+                      return CircularProgressIndicator();
+                  },
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

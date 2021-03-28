@@ -42,98 +42,103 @@ class _ParentHomeState extends State<ParentHome> {
                 .snapshots(),
             builder:
                 (BuildContext cosntext, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (snapshot.data.docChanges.isNotEmpty) {
-                final data = snapshot.data.docs[0];
-                return Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    children: [
-                      Text(
-                        "Your FinKid",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.white,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      CircleAvatar(
-                        radius: 50,
-                        backgroundImage:
-                            NetworkImage(data['photoURL'].toString()),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        data['name'],
-                        style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              } else
-                return Container(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0,
-                          vertical: 20,
-                        ),
-                        child: Text(
-                          "Your FinKid has not joined yet.",
+              if (snapshot.hasData) {
+                if (snapshot.data.docs.isNotEmpty) {
+                  final data = snapshot.data.docs[0];
+                  return Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      children: [
+                        Text(
+                          "Your FinKid",
+                          textAlign: TextAlign.left,
                           style: TextStyle(
-                            color: Colors.white,
                             fontSize: 25,
+                            color: Colors.white,
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0,
-                          vertical: 20,
+                        SizedBox(
+                          height: 20,
                         ),
-                        child: FutureBuilder(
-                          future: getParentData(),
-                          builder:
-                              (BuildContext context, AsyncSnapshot snapshot) {
-                            if (snapshot.hasData) {
-                              final dynamicLinkUrl = snapshot.data['referLink'];
-                              return OutlinedButton(
-                                style: OutlinedButton.styleFrom(
-                                    backgroundColor: Colors.white,
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 90, vertical: 18),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    )),
-                                onPressed: () {
-                                  Share.share(
-                                      'Hey, Download this app and you will earn rewards.\n Download Now -$dynamicLinkUrl');
-                                },
-                                child: Text(
-                                  "Invite Your FinKid!",
-                                  style: GoogleFonts.playfairDisplay(
-                                    color: kBluePurple ?? Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
+                        CircleAvatar(
+                          radius: 60,
+                          backgroundImage: NetworkImage(
+                                  "https://image.freepik.com/free-photo/outdoor-handsome-boy-portrait-teen-boy-hood-park-nature-background_79443-26.jpg") ??
+                              NetworkImage(data['photoURL'].toString()),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          data['name'],
+                          style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                } else
+                  return Container(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0,
+                            vertical: 20,
+                          ),
+                          child: Text(
+                            "Your FinKid has not joined yet.",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 25,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0,
+                            vertical: 20,
+                          ),
+                          child: FutureBuilder(
+                            future: getParentData(),
+                            builder:
+                                (BuildContext context, AsyncSnapshot snapshot) {
+                              if (snapshot.hasData) {
+                                final dynamicLinkUrl =
+                                    snapshot.data['referLink'];
+                                return OutlinedButton(
+                                  style: OutlinedButton.styleFrom(
+                                      backgroundColor: Colors.white,
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 90, vertical: 18),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      )),
+                                  onPressed: () {
+                                    Share.share(
+                                        'Hey, Download this app and you will earn rewards.\n Download Now -$dynamicLinkUrl');
+                                  },
+                                  child: Text(
+                                    "Invite Your FinKid!",
+                                    style: GoogleFonts.playfairDisplay(
+                                      color: kBluePurple ?? Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                ),
-                              );
-                            } else
-                              return CircularProgressIndicator();
-                          },
+                                );
+                              } else
+                                return CircularProgressIndicator();
+                            },
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                );
+                      ],
+                    ),
+                  );
+              } else
+                return CircularProgressIndicator();
             },
           ),
           Padding(
